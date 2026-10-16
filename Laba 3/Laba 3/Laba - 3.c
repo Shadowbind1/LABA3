@@ -3,7 +3,10 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #define D 2.54
+#define SPANISH_INCH 2.32166
+#define LITHUANIAN_INCH 2.707
 
 void task1()
 {
@@ -11,48 +14,61 @@ void task1()
 
     printf("\n===== ЗАДАНИЕ 1 =====\n");
 
-    puts("Введите число");
-    scanf("%d", &num1);
+    printf("Введите число: ");
+    if (scanf("%d", &num1) != 1)
+    {
+        printf("Ошибка ввода.\n");
+        return;
+    }
 
     printf("Введено число %d\n", num1);
 
-    puts("Введите второе число");
-    scanf("%d", &num2);
+    printf("Введите второе число: ");
+    if (scanf("%d", &num2) != 1)
+    {
+        printf("Ошибка ввода.\n");
+        return;
+    }
 
     printf("Введено второе число %d\n", num2);
 
-    printf("Сумма %d\n", num1 + num2);
-    printf("Разность %d\n", num1 - num2);
-    printf("Произведение %d\n", num1 * num2);
+    printf("Сумма: %d\n", num1 + num2);
+    printf("Разность: %d\n", num1 - num2);
+    printf("Произведение: %d\n", num1 * num2);
 
     if (num1 != 0)
     {
-        printf("Частное %d\n", num2 / num1);
-        printf("Остаток %d\n", num2 % num1);
+        printf("Частное: %.2f\n", (double)num2 / num1);
+        printf("Остаток: %d\n", num2 % num1);
     }
     else
     {
-        printf("Деление на ноль невозможно\n");
+        printf("Деление на ноль невозможно.\n");
     }
 }
 
-
 void task2()
 {
-    int dym;
-    float result;
+    double dym;
 
     printf("\n===== ЗАДАНИЕ 2 =====\n");
 
     printf("Введите количество дюймов: ");
-    scanf("%d", &dym);
+    if (scanf("%lf", &dym) != 1 || dym < 0)
+    {
+        printf("Ошибка: введите неотрицательное число.\n");
+        return;
+    }
 
-    result = D * dym;
+    printf("%.2f международных дюйма = %.2f см\n",
+        dym, D * dym);
 
-    printf("%d дюймов - это %.2f см\n", dym, result);
+    printf("%.2f испанских дюйма = %.2f см\n",
+        dym, SPANISH_INCH * dym);
+
+    printf("%.2f литовских дюйма = %.2f см\n",
+        dym, LITHUANIAN_INCH * dym);
 }
-
-
 
 void task3()
 {
@@ -61,14 +77,23 @@ void task3()
     printf("\n===== ЗАДАНИЕ 3 =====\n");
 
     printf("Введите число a: ");
-    scanf("%f", &a);
+    if (scanf("%f", &a) != 1)
+    {
+        printf("Ошибка ввода.\n");
+        return;
+    }
 
     printf("Введите число b: ");
-    scanf("%f", &b);
+    if (scanf("%f", &b) != 1)
+    {
+        printf("Ошибка ввода.\n");
+        return;
+    }
 
     printf("\n");
     printf("+----------------------+------------+------------+\n");
-    printf("| %-18s | %-10s | %-10s |\n", "a * b", "a + b", "a - b");
+    printf("| %-18s | %-10s | %-10s |\n",
+        "a * b", "a + b", "a - b");
     printf("+----------------------+------------+------------+\n");
 
     printf("| %6.2f * %-6.2f     | %10.2f | %10.2f |\n",
@@ -82,26 +107,32 @@ void task3()
     printf("+----------------------+------------+------------+\n");
 }
 
-
-
 void taskdz()
 {
     double m, h, F;
     const double g = 9.8;
 
+    printf("\n===== ДОМАШНЕЕ ЗАДАНИЕ =====\n");
+
     printf("Введите массу тела (кг): ");
-    scanf("%lf", &m);
+    if (scanf("%lf", &m) != 1 || m < 0)
+    {
+        printf("Ошибка: масса должна быть неотрицательной.\n");
+        return;
+    }
 
     printf("Введите высоту (м): ");
-    scanf("%lf", &h);
+    if (scanf("%lf", &h) != 1 || h < 0)
+    {
+        printf("Ошибка: высота должна быть неотрицательной.\n");
+        return;
+    }
 
     F = m * g;
 
     printf("Сила тяжести: %.2f Н\n", F);
-
-    return 0;
+    printf("Потенциальная энергия: %.2f Дж\n", m * g * h);
 }
-
 
 int main()
 {
